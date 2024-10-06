@@ -62,7 +62,7 @@ app.use('/image', image); // Image route handled by the image router
 app.use(express.static(path.join(__dirname, '/public/dist')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+    res.sendFile(path.join(__dirname, 'public/dist/index.html'));
 });
 
 

@@ -60,7 +60,7 @@ app.use('/image', image_1.default); // Image route handled by the image router
 // Serve static files from react-dist
 app.use(express_1.default.static(path_1.default.join(__dirname, '/public/dist')));
 app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '../dist/index.html'));
+    res.sendFile(path_1.default.join(__dirname, 'public/dist/index.html'));
 });
 // Server setup
 const server = app.listen(port, () => {
