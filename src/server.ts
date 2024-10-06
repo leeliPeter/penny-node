@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import path from 'path';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
@@ -12,9 +13,11 @@ const app = express();
 const port = 3000;
 
 // CORS setup for allowing frontend requests from specific origins
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://3.144.125.59', 'https://3.144.125.59', 'http://localhost:5173'];
+// const allowedOrigins = ['http://localhost:5173'];
 app.use(cors({
     origin: function (origin, callback) {
+        console.log('Origin:', origin);  // Log the incoming origin
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
@@ -55,7 +58,18 @@ app.use('/user', user); // Assuming there's a user route
 app.use('/upload', upload); // Upload route handled by the upload router
 app.use('/image', image); // Image route handled by the image router
 
+// Serve static files from react-dist
+app.use(express.static(path.join(__dirname, '/public/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../react-dist/index.html'));
+});
+
+
 // Server setup
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
+
+
+server.setTimeout(500000); 

@@ -59,6 +59,9 @@ app.use('/upload', upload_1.default); // Upload route handled by the upload rout
 app.use('/image', image_1.default); // Image route handled by the image router
 // Serve static files from react-dist
 app.use(express_1.default.static(path_1.default.join(__dirname, '/public/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, '../react-dist/index.html'));
+});
 // Server setup
 const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
