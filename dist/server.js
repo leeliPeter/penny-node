@@ -16,7 +16,7 @@ const image_1 = __importDefault(require("./routes/image")); // Importing the ima
 const app = (0, express_1.default)();
 const port = 3000;
 // CORS setup for allowing frontend requests from specific origins
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = ['http://3.144.125.59:3000/', 'http://localhost:3000'];
 app.use((0, cors_1.default)({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
